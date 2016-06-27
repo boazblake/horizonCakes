@@ -75574,7 +75574,7 @@
 
 	      var divStyleImg = {
 	        width: 300 + 'px',
-	        float: 'right',
+	        marginLeft: 1200 + 'px',
 	        display: 'block'
 
 	      };

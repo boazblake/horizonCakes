@@ -2,7 +2,7 @@
   outline: none;
 }
 .center {
-  width:400px;
+  width: 100%;
   margin: auto;
   padding: 10px;
   align-content: center;
@@ -11,12 +11,12 @@
 .row {
   display: inline-block;
   margin: 2%;
-  width: 400px;
+  width: 100px;
   border-radius: 20px;
   color: white;
   font-size: 2em;
 }
 
 #productImage {
-  height: 400px;
+  height: 200px;
 }
