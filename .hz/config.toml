@@ -25,7 +25,7 @@
 #                application state
 # 'serve_static' will serve files from the given directory over HTTP/HTTPS
 #------------------------------------------------------------------------------
-project_name = "msgBoard"
+project_name = "jensCakes"
 # serve_static = "dist"
 
 
@@ -77,7 +77,7 @@ token_secret = "0PaG3xCQOro/XpO5/npcvjSzoFUeHVrK4Zn2lqK4ls8MfvKux216abMHqHOz/iXn
 # id = "000000000000000"
 # secret = "00000000000000000000000000000000"
 #
-[auth.google]
+# [auth.google]
 #id = "00000000000000000000000000000000-00000000000000000000000000000000.00000000000000000000000000000000.00000000000000000000000000000000.00000000000000000000000000000000"
 #secret = "00000000000000000000000000000000"
 #
