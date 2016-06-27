@@ -8,11 +8,15 @@
   align-content: center;
 }
 
-.row{
+.row {
   display: inline-block;
   margin: 2%;
   width: 400px;
   border-radius: 20px;
   color: white;
   font-size: 2em;
+}
+
+#productImage {
+  height: 400px;
 }
