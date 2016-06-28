@@ -126,7 +126,7 @@ let FileStackUpload = React.createClass({
 
   render: function(){
     return (
-      <div>
+      <div >
         {this._showBtnsJSX(this.state.localFileUploaded)}      
         {this._showLoadedFile(this.state.localFileUploaded)}
       </div>

@@ -18,10 +18,10 @@ export default class SelectedProduct extends React.Component {
 
   render(){   
     return(
-      <button className="btn btn-success"
+      <button className="btn btn-default"
               onClick={this.props.selectProduct}>
-                <span className="glyphicon glyphicon-check"></span>
-              </button>
+        <i className="fa fa-heart" aria-hidden="true"></i>
+      </button>
     )
   }
 }

@@ -49069,12 +49069,16 @@
 	  (0, _createClass3.default)(Products, [{
 	    key: 'render',
 	    value: function render() {
+	      var divStyle = {
+	        display: 'block'
+	      };
+
 	      var productJSX = this.props.products.map(function (product, i) {
 	        return _react2.default.createElement(_product2.default, { product: product, key: i });
 	      });
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'container-fluid' },
+	        { style: divStyle, className: 'container-fluid' },
 	        productJSX
 	      );
 	    }
@@ -49149,8 +49153,7 @@
 
 	    _this.state = {
 	      productStatus: productStatus,
-	      bkgColor: bkgColor,
-	      src: _this.props.product.url.split('/')[5]
+	      bkgColor: bkgColor
 	    };
 
 	    _this.handleOnSelect = _this.handleOnSelect.bind(_this);
@@ -49179,7 +49182,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var imgSrc = 'https://www.filestackapi.com/api/file/' + this.state.src;
+	      var imgSrc = 'https://www.filestackapi.com/api/file/' + this.props.product.imgLink.split('/')[5];
 	      var bkgColor = this.props.product.productSelected ? '#3498db' : '#bdc3c7';
 
 	      var divStyle = {
@@ -49194,23 +49197,25 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'imgBox' },
-	          _react2.default.createElement('img', { id: 'productImage', src: imgSrc }),
-	          _react2.default.createElement('i', { className: 'fa fa-heart', 'aria-hidden': 'true' })
+	          _react2.default.createElement('img', { id: 'productImage', src: imgSrc })
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-xs-2 center' },
-	          this.props.product.author
+	          'description: ',
+	          this.props.product.description
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-xs-5 center' },
-	          this.props.product.text
+	          'ID: ',
+	          this.props.product.id
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-xs-3 center' },
-	          (0, _moment2.default)(this.props.product.date).format('MMM Do YYYY, h:mm:ss a')
+	          'uploadDate: ',
+	          (0, _moment2.default)(this.props.product.uploadDate).format('MMM Do YYYY, h:mm:ss a')
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -63083,9 +63088,9 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "button",
-	        { className: "btn btn-success",
+	        { className: "btn btn-default",
 	          onClick: this.props.selectProduct },
-	        _react2.default.createElement("span", { className: "glyphicon glyphicon-check" })
+	        _react2.default.createElement("i", { className: "fa fa-heart", "aria-hidden": "true" })
 	      );
 	    }
 	  }]);
@@ -76332,6 +76337,14 @@
 
 	var _secrets2 = _interopRequireDefault(_secrets);
 
+	var _moment = __webpack_require__(619);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _description = __webpack_require__(949);
+
+	var _description2 = _interopRequireDefault(_description);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Horizon = __webpack_require__(724);
@@ -76363,9 +76376,19 @@
 	      });
 	    }
 	  }, {
+	    key: '_handleAddDescription',
+	    value: function _handleAddDescription(evt) {
+	      var descriptionforImage = evt.target.value;
+	      console.log('descriptionforImage', descriptionforImage);
+	      this.setState({
+	        descriptionforImage: descriptionforImage
+	      });
+	    }
+	  }, {
 	    key: '_createRecord',
 	    value: function _createRecord() {
 	      var productData = this.state.uploadedBlob;
+	      productData.description = this.state.descriptionforImage;
 
 	      this._uploadToFileStack(this.state.uploadedImgEl, productData, this._saveToReThinkDB);
 	    }
@@ -76377,7 +76400,6 @@
 
 	      filepicker.store(imgDataEl, function (Blob) {
 	        console.log('sucessfully saved!!', Blob);
-	        console.log('imgDataEl!!', imgDataEl);
 	        cb(productData, Blob);
 
 	        /////chnage state of _fileuplaod to display ""succesfully uplaoded
@@ -76388,12 +76410,17 @@
 	  }, {
 	    key: '_saveToReThinkDB',
 	    value: function _saveToReThinkDB(productData, Blob) {
-	      productData.imgLink = Blob.url;
-	      productData.size = Blob.size / 1000;
-	      productData.name = Blob.filename;
+	      var now = Date.now();
+	      var productDataforDB = {};
+	      productDataforDB.imgLink = Blob.url;
+	      productDataforDB.size = Blob.size / 1000;
+	      productDataforDB.name = Blob.filename;
+	      productDataforDB.uploadDate = now;
+	      productDataforDB.description = productData.description;
 	      console.log('productData for rethinkDB', productData);
+	      console.log('productDataforDB', productDataforDB);
 	      console.log('Blob', Blob);
-	      jensCakes.store(Blob);
+	      jensCakes.store(productDataforDB);
 	    }
 	  }, {
 	    key: 'render',
@@ -76406,6 +76433,7 @@
 	          null,
 	          'Upload Your stuff here!'
 	        ),
+	        _react2.default.createElement(_description2.default, { addDescription: this._handleAddDescription.bind(this) }),
 	        _react2.default.createElement(_fileUpload2.default, { onSubmit: this._createRecord.bind(this), onUpload: this._handleImgUpload.bind(this) }),
 	        _react2.default.createElement('div', { id: 'previewImg' })
 	      );
@@ -76753,6 +76781,63 @@
 	};
 
 	exports.default = Secrets;
+
+/***/ },
+/* 949 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(531);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(557);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(558);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(562);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(609);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(300);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Description = function (_React$Component) {
+	  (0, _inherits3.default)(Description, _React$Component);
+
+	  function Description(props) {
+	    (0, _classCallCheck3.default)(this, Description);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Description).call(this, props));
+	  }
+
+	  (0, _createClass3.default)(Description, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement("textarea", { rows: "4", cols: "50",
+	        placeholder: "Enter description here!",
+	        onChange: this.props.addDescription });
+	    }
+	  }]);
+	  return Description;
+	}(_react2.default.Component);
+
+	exports.default = Description;
 
 /***/ }
 /******/ ]);

@@ -8,11 +8,17 @@ export default class Products extends React.Component {
   }
 
   render(){
+    let divStyle = {
+      display: 'block',
+    }
+
+
+
     let productJSX = this.props.products.map((product, i) => {
       return <Product product={product} key={i} />
     });
     return (
-      <div className="container-fluid">
+      <div style={divStyle} className="container-fluid">
         {productJSX}
       </div>
     );

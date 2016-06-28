@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom'
 import filepickerWrapper from './filePicker'
 import FileStackUpload from './_fileUpload'
 import Secrets from '../../secrets'
+import Moment from 'moment'
+import Description from './description'
+
+
+
 const Horizon = require('@horizon/client');
 
 const horizon = Horizon({ authType: 'unauthenticated' });
@@ -24,8 +29,18 @@ class Admin extends React.Component {
     })
   }
 
+  _handleAddDescription(evt) {
+    let descriptionforImage = evt.target.value
+    console.log('descriptionforImage', descriptionforImage)
+    this.setState({
+      descriptionforImage
+    })
+  }
+
+
   _createRecord(){
     let productData =  this.state.uploadedBlob
+    productData.description = this.state.descriptionforImage
  
     this._uploadToFileStack(
       this.state.uploadedImgEl, 
@@ -42,7 +57,6 @@ class Admin extends React.Component {
       imgDataEl,
       function(Blob){
         console.log('sucessfully saved!!', Blob)
-        console.log('imgDataEl!!', imgDataEl)
         cb(productData, Blob)
         
 /////chnage state of _fileuplaod to display ""succesfully uplaoded
@@ -56,21 +70,27 @@ class Admin extends React.Component {
   }
 
   _saveToReThinkDB(productData, Blob){
-    productData.imgLink = Blob.url;
-    productData.size = Blob.size/1000;
-    productData.name = Blob.filename;
+    var now = Date.now();
+    let productDataforDB = {};
+    productDataforDB.imgLink = Blob.url;
+    productDataforDB.size = Blob.size/1000;
+    productDataforDB.name = Blob.filename;
+    productDataforDB.uploadDate = now;
+    productDataforDB.description = productData.description;
     console.log('productData for rethinkDB', productData);
+    console.log('productDataforDB', productDataforDB);
     console.log('Blob', Blob);
-    jensCakes.store(Blob);
+    jensCakes.store(productDataforDB);
   }
 
   render(){
     return (
       <div>
         <h1>Upload Your stuff here!</h1>
+        <Description addDescription={this._handleAddDescription.bind(this)}/>
         <FileStackUpload onSubmit={this._createRecord.bind(this)} onUpload={this._handleImgUpload.bind(this)}/>
         <div id='previewImg'></div>
-        </div>
+      </div>
     )
   }
 }
