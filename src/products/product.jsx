@@ -11,11 +11,9 @@ export default class Product extends Component {
   constructor(props){
     super(props);
     let productStatus = (this.props.product.productSelected);
-    let bkgColor = (productStatus) ? '#3498db' : '#bdc3c7';
 
     this.state = {
       productStatus: productStatus,
-      bkgColor: bkgColor
     }      
 
     this.handleOnSelect = this.handleOnSelect.bind(this);
@@ -41,16 +39,8 @@ export default class Product extends Component {
 
   render() { 
     let imgSrc = `https://www.filestackapi.com/api/file/`+this.props.product.imgLink.split('/')[5]
-    let bkgColor = (this.props.product.productSelected) ? '#3498db' : '#bdc3c7';
-
-    let divStyle =  {
-      backgroundColor: bkgColor
-    }
-
-    console.log(this.props)
-
     return (
-      <div style={divStyle} className="row">
+      <div className="row">
         <div className="imgBox">
          <img id="productImage" src={imgSrc}/>
         </div>
@@ -65,8 +55,8 @@ export default class Product extends Component {
             .format('MMM Do YYYY, h:mm:ss a')}
         </div>
         <div className="col-xs-2 center">
-          <RemoveProduct id={this.props.product.id}/>
-          <SelectedProduct selectProduct={this.handleOnSelect} productSelected={this.state.productStatus}/>
+          <RemoveProduct selectionStatus={this.state.productStatus} id={this.props.product.id}/>
+          <SelectedProduct selectProduct={this.handleOnSelect} productStatus={this.state.productStatus}/>
         </div>
       </div>
     );

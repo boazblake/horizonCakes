@@ -4,23 +4,31 @@ export default class SelectedProduct extends React.Component {
   constructor(props){
     super(props);
     this.props = props;
-    
+
     this.state = {
-      productSelected: this.props.productSelected
+      productStatus: (this.props.productStatus)
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      productSelected: nextProps.productSelected
+      productStatus: nextProps.productStatus
     })
   }
 
-  render(){   
+  render(){
+    let fontColor = (this.props.productStatus) ? '#3498db' : '#bdc3c7';
+    console.log('fontColor', fontColor, 'product slected: ', (this.props.productStatus) )
+
+    let divStyle =  {
+      color: fontColor
+    }
+
+
     return(
-      <button className="btn btn-default"
+      <button className="btn btn-link"
               onClick={this.props.selectProduct}>
-        <i className="fa fa-heart" aria-hidden="true"></i>
+        <i style={divStyle} className="fa fa-heart" aria-hidden="true"></i>
       </button>
     )
   }

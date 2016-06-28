@@ -49149,11 +49149,9 @@
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Product).call(this, props));
 
 	    var productStatus = _this.props.product.productSelected;
-	    var bkgColor = productStatus ? '#3498db' : '#bdc3c7';
 
 	    _this.state = {
-	      productStatus: productStatus,
-	      bkgColor: bkgColor
+	      productStatus: productStatus
 	    };
 
 	    _this.handleOnSelect = _this.handleOnSelect.bind(_this);
@@ -49183,17 +49181,9 @@
 	    key: 'render',
 	    value: function render() {
 	      var imgSrc = 'https://www.filestackapi.com/api/file/' + this.props.product.imgLink.split('/')[5];
-	      var bkgColor = this.props.product.productSelected ? '#3498db' : '#bdc3c7';
-
-	      var divStyle = {
-	        backgroundColor: bkgColor
-	      };
-
-	      console.log(this.props);
-
 	      return _react2.default.createElement(
 	        'div',
-	        { style: divStyle, className: 'row' },
+	        { className: 'row' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'imgBox' },
@@ -49220,8 +49210,8 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-xs-2 center' },
-	          _react2.default.createElement(_removeProduct2.default, { id: this.props.product.id }),
-	          _react2.default.createElement(_selectedProduct2.default, { selectProduct: this.handleOnSelect, productSelected: this.state.productStatus })
+	          _react2.default.createElement(_removeProduct2.default, { selectionStatus: this.state.productStatus, id: this.props.product.id }),
+	          _react2.default.createElement(_selectedProduct2.default, { selectProduct: this.handleOnSelect, productStatus: this.state.productStatus })
 	        )
 	      );
 	    }
@@ -63028,7 +63018,7 @@
 /* 722 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -63071,26 +63061,33 @@
 	    _this.props = props;
 
 	    _this.state = {
-	      productSelected: _this.props.productSelected
+	      productStatus: _this.props.productStatus
 	    };
 	    return _this;
 	  }
 
 	  (0, _createClass3.default)(SelectedProduct, [{
-	    key: "componentWillReceiveProps",
+	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      this.setState({
-	        productSelected: nextProps.productSelected
+	        productStatus: nextProps.productStatus
 	      });
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
+	      var fontColor = this.props.productStatus ? '#3498db' : '#bdc3c7';
+	      console.log('fontColor', fontColor, 'product slected: ', this.props.productStatus);
+
+	      var divStyle = {
+	        color: fontColor
+	      };
+
 	      return _react2.default.createElement(
-	        "button",
-	        { className: "btn btn-default",
+	        'button',
+	        { className: 'btn btn-link',
 	          onClick: this.props.selectProduct },
-	        _react2.default.createElement("i", { className: "fa fa-heart", "aria-hidden": "true" })
+	        _react2.default.createElement('i', { style: divStyle, className: 'fa fa-heart', 'aria-hidden': 'true' })
 	      );
 	    }
 	  }]);
