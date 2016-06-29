@@ -18,7 +18,7 @@ export default class Products extends React.Component {
       return <Product product={product} key={i} />
     });
     return (
-      <div style={divStyle} className="container-fluid">
+      <div style={divStyle} className="container-fluid component">
         {productJSX}
       </div>
     );

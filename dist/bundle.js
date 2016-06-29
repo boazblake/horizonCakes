@@ -49078,7 +49078,7 @@
 	      });
 	      return _react2.default.createElement(
 	        'div',
-	        { style: divStyle, className: 'container-fluid' },
+	        { style: divStyle, className: 'container-fluid component' },
 	        productJSX
 	      );
 	    }
@@ -49151,10 +49151,12 @@
 	    var productStatus = _this.props.product.productSelected;
 
 	    _this.state = {
-	      productStatus: productStatus
+	      productStatus: productStatus,
+	      showDescription: false
 	    };
 
 	    _this.handleOnSelect = _this.handleOnSelect.bind(_this);
+	    _this.handleShowDescription = _this.handleShowDescription.bind(_this);
 	    return _this;
 	  }
 
@@ -49178,40 +49180,57 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleShowDescription',
+	    value: function handleShowDescription(evt) {
+	      evt.preventDefault();
+	      if (this.state.showDescription) {
+	        return this.setState({
+	          showDescription: false
+	        });
+	      } else {
+	        return this.setState({
+	          showDescription: true
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var imgSrc = 'https://www.filestackapi.com/api/file/' + this.props.product.imgLink.split('/')[5];
+	      var showHide = this.state.showDescription ? "col-xs-2 center show" : "col-xs-2 center hide";
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'row' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'imgBox' },
-	          _react2.default.createElement('img', { id: 'productImage', src: imgSrc })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-2 center' },
-	          'description: ',
-	          this.props.product.description
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-5 center' },
-	          'ID: ',
-	          this.props.product.id
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-3 center' },
-	          'uploadDate: ',
-	          (0, _moment2.default)(this.props.product.uploadDate).format('MMM Do YYYY, h:mm:ss a')
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-2 center' },
-	          _react2.default.createElement(_removeProduct2.default, { selectionStatus: this.state.productStatus, id: this.props.product.id }),
+	          { className: 'imgBox clearfix' },
+	          _react2.default.createElement('img', { id: 'productImage', src: imgSrc }),
 	          _react2.default.createElement(_selectedProduct2.default, { selectProduct: this.handleOnSelect, productStatus: this.state.productStatus })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-2 center ', onClick: this.handleShowDescription },
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'lead' },
+	            (0, _moment2.default)(this.props.product.uploadDate).format('MMM Do YYYY')
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: showHide },
+	          'description:',
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'lead' },
+	            this.props.product.description
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-2 left' },
+	          _react2.default.createElement(_removeProduct2.default, { selectionStatus: this.state.productStatus, id: this.props.product.id })
 	        )
 	      );
 	    }
@@ -63076,7 +63095,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var fontColor = this.props.productStatus ? '#3498db' : '#bdc3c7';
+	      var fontColor = this.props.productStatus ? '#c0392b' : '#bdc3c7';
 	      console.log('fontColor', fontColor, 'product slected: ', this.props.productStatus);
 
 	      var divStyle = {
@@ -63085,7 +63104,7 @@
 
 	      return _react2.default.createElement(
 	        'button',
-	        { className: 'btn btn-link',
+	        { className: 'btn btn-link heart right',
 	          onClick: this.props.selectProduct },
 	        _react2.default.createElement('i', { style: divStyle, className: 'fa fa-heart', 'aria-hidden': 'true' })
 	      );
@@ -75569,36 +75588,17 @@
 	  (0, _createClass3.default)(Home, [{
 	    key: 'render',
 	    value: function render() {
-	      var divStyleLogo = {
-	        width: 300 + 'px',
-	        display: 'block'
-	      };
-
-	      var divStyleImg = {
-	        width: 300 + 'px',
-	        marginLeft: 1200 + 'px',
-	        display: 'block'
-
-	      };
-
-	      var divStyleTitle = {
-	        textAlign: 'center',
-	        color: 'pink',
-	        display: 'block',
-	        fontFamily: 'Frijole',
-	        fontSize: '50px'
-	      };
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement('img', { style: divStyleLogo, src: './assets/images/logo_pic.png' }),
+	        { id: 'splashPage', className: 'component' },
+	        _react2.default.createElement('img', { className: 'animated slideInRight', id: 'logo', src: './assets/images/logo_pic.png' }),
 	        _react2.default.createElement(
 	          'h1',
-	          { style: divStyleTitle },
+	          { className: 'animated zoomIn', id: 'title' },
 	          'The Flour Girl Cake Company'
 	        ),
-	        _react2.default.createElement('img', { style: divStyleImg, src: './assets/images/french-girl-in-cafe.jpg' })
+	        _react2.default.createElement('img', { className: 'animated slideInLeft', id: 'girl', src: './assets/images/french-girl-in-cafe.jpg' })
 	      );
 	    }
 	  }]);
@@ -76114,7 +76114,7 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'component' },
 	        _react2.default.createElement('img', { style: divStyleImg, src: './assets/images/menuPic.jpg' }),
 	        _react2.default.createElement(
 	          'div',
@@ -76239,7 +76239,7 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'aboutWrapper', style: divStyleWrapper },
+	        { className: 'component', style: divStyleWrapper },
 	        _react2.default.createElement('img', { style: StyleBkgImg, src: './assets/images/about_pic.jpg' }),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(

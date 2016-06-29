@@ -53,7 +53,7 @@ class Menu extends React.Component {
 
 
     return (
-      <div>
+      <div className="component">
         <img style={divStyleImg} src='./assets/images/menuPic.jpg'/>
         <div className='left' style={divStyleLeft}>
           <h1 style={divStyleHeading}>FROSTINGS AND FILLINGS</h1>

@@ -17,7 +17,7 @@ export default class SelectedProduct extends React.Component {
   }
 
   render(){
-    let fontColor = (this.props.productStatus) ? '#3498db' : '#bdc3c7';
+    let fontColor = (this.props.productStatus) ? '#c0392b' : '#bdc3c7';
     console.log('fontColor', fontColor, 'product slected: ', (this.props.productStatus) )
 
     let divStyle =  {
@@ -26,7 +26,7 @@ export default class SelectedProduct extends React.Component {
 
 
     return(
-      <button className="btn btn-link"
+      <button className="btn btn-link heart right"
               onClick={this.props.selectProduct}>
         <i style={divStyle} className="fa fa-heart" aria-hidden="true"></i>
       </button>

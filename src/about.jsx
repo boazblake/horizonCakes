@@ -27,7 +27,7 @@ class About extends React.Component {
     }
 
     return (
-      <div className='aboutWrapper' style={divStyleWrapper}>
+      <div className="component" style={divStyleWrapper}>
         <img style={StyleBkgImg} src='./assets/images/about_pic.jpg'/>
         <br/>
         <div className='txtWrapper' style={divStyleWRapperTxt}>
