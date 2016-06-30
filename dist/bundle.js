@@ -8161,7 +8161,7 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _admin2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _app2.default })
 	), document.querySelector('.app'));
 
 /***/ },
@@ -49206,6 +49206,7 @@
 	          'div',
 	          { className: 'imgBox clearfix' },
 	          _react2.default.createElement('img', { id: 'productImage', src: imgSrc }),
+	          _react2.default.createElement('a', { 'data-pin-do': 'bookmark', 'data-pin-shape': 'round', href: 'https://www.pinterest.com/pin/create/button/' }),
 	          _react2.default.createElement(_selectedProduct2.default, { selectProduct: this.handleOnSelect, productStatus: this.state.productStatus })
 	        ),
 	        _react2.default.createElement(

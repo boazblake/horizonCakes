@@ -61,6 +61,8 @@ export default class Product extends Component {
       <div className="row">
         <div className="imgBox clearfix">
           <img id="productImage" src={imgSrc} />
+          <a data-pin-do="bookmark" data-pin-shape="round" href="https://www.pinterest.com/pin/create/button/">
+          </a>
           <SelectedProduct selectProduct={this.handleOnSelect} productStatus={this.state.productStatus}/>
         </div>
         <div className="col-xs-2 center " onClick={this.handleShowDescription}>

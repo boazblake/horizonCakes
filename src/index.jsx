@@ -11,6 +11,6 @@ const horizon = Horizon({ authType: 'unauthenticated' });
 
 ReactDOM.render((
   <Router history={browserHistory}>
-    <Route path='/' component={Admin} />
+    <Route path='/' component={App} />
   </Router>
   ), document.querySelector('.app'));
