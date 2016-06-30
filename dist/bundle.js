@@ -8161,7 +8161,7 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _app2.default })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _admin2.default })
 	), document.querySelector('.app'));
 
 /***/ },
