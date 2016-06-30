@@ -63,6 +63,7 @@ export default class Product extends Component {
           <img id="productImage" src={imgSrc} />
           <a data-pin-do="bookmark" data-pin-shape="round" href="https://www.pinterest.com/pin/create/button/">
           </a>
+          <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=124&layout=button_count&action=like&size=small&show_faces=true&share=true&height=46&appId" width="124" height="46" style={{border:"none", overflow:"hidden"}} scrolling="no" frameborder="0" allowTransparency="true"></iframe>
           <SelectedProduct selectProduct={this.handleOnSelect} productStatus={this.state.productStatus}/>
         </div>
         <div className="col-xs-2 center " onClick={this.handleShowDescription}>

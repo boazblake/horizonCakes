@@ -49207,6 +49207,7 @@
 	          { className: 'imgBox clearfix' },
 	          _react2.default.createElement('img', { id: 'productImage', src: imgSrc }),
 	          _react2.default.createElement('a', { 'data-pin-do': 'bookmark', 'data-pin-shape': 'round', href: 'https://www.pinterest.com/pin/create/button/' }),
+	          _react2.default.createElement('iframe', { src: 'https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=124&layout=button_count&action=like&size=small&show_faces=true&share=true&height=46&appId', width: '124', height: '46', style: { border: "none", overflow: "hidden" }, scrolling: 'no', frameborder: '0', allowTransparency: 'true' }),
 	          _react2.default.createElement(_selectedProduct2.default, { selectProduct: this.handleOnSelect, productStatus: this.state.productStatus })
 	        ),
 	        _react2.default.createElement(
